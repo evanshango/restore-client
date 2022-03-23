@@ -99,7 +99,7 @@ export const catalogSlice = createSlice({
             state.productParams = initParams()
         },
         setMetaData: (state: Draft<any>, action) => {
-            state.metaData = action.payload
+            state.meta = action.payload
         }
     },
     extraReducers: (builder => {

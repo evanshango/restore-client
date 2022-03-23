@@ -3,13 +3,13 @@ import {Box, Pagination, Typography, useMediaQuery} from "@mui/material";
 import {IMetadata} from "../models/pagination";
 
 interface IProps {
-    metaData: IMetadata
+    meta: IMetadata
     onPageChange: (page: number) => void
 }
 
-const AppPagination = ({metaData, onPageChange}: IProps) => {
+const AppPagination = ({meta, onPageChange}: IProps) => {
     const matches = useMediaQuery("(min-width:720px)");
-    const {totalPages, currentPage, totalCount, pageSize} = metaData
+    const {totalPages, currentPage, totalCount, pageSize} = meta
     return (
         <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}
              flexDirection={!matches ? 'column' : 'row'}>

@@ -30,7 +30,7 @@ const Catalog = () => {
         if (!filtersLoaded) dispatch(fetchFiltersAsync())
     }, [dispatch, filtersLoaded])
 
-    if (status.includes('pending') || !meta) return <Loader message={'Loading Products...'}/>
+    if (!filtersLoaded) return <Loader message={'Loading Products...'}/>
 
     return (
         <Grid container spacing={2} sx={{mb: 1}}>
@@ -62,7 +62,9 @@ const Catalog = () => {
             </Grid>
             <Grid item xs={0} md={3}/>
             <Grid item xs={12} md={9}>
-                <AppPagination metaData={meta} onPageChange={(page: number) => dispatch(setPageNumber({page}))}/>
+                {meta && (
+                    <AppPagination meta={meta} onPageChange={(page: number) => dispatch(setPageNumber({page}))}/>
+                )}
             </Grid>
         </Grid>
     );
