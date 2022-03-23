@@ -18,7 +18,7 @@ const sortOptions = [
 const Catalog = () => {
     const products = useAppSelector(productSelectors.selectAll)
     const {
-        productsLoaded, status, filtersLoaded, brands, types, productParams, meta
+        productsLoaded, filtersLoaded, brands, types, productParams, meta
     } = useAppSelector(state => state.catalog)
     const dispatch = useAppDispatch()
 
