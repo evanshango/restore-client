@@ -54,7 +54,7 @@ const ProductCard = ({product}: Props) => {
                 </Typography>
             </CardContent>
             <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
-                <LoadingButton loading={status.includes(`pendingAddItem${product.id}`)} size={'small'}
+                <LoadingButton loading={status ===`pendingAddItem${product.id}`} size={'small'}
                                variant={'outlined'} startIcon={<ShoppingCartCheckoutOutlined/>}
                                onClick={() => dispatch(addBasketItemAsync({productId: product.id}))}
                                sx={{color: '#ff0000', borderColor: '#ff0000', '&:hover': {borderColor: '#ff0000'}}}>Cart

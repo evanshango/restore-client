@@ -1,7 +1,8 @@
-import axios, {AxiosError, AxiosResponse} from "axios";
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
 import {toast} from "react-toastify";
 import {history} from "../../";
 import {PaginatedResponse} from "../models/pagination";
+import {store} from "../store/configureStore";
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500))
 
@@ -10,10 +11,21 @@ axios.defaults.withCredentials = true
 
 const responseBody = (res: AxiosResponse) => res.data
 
+axios.interceptors.request.use((config: AxiosRequestConfig) => {
+    const account = store.getState().account.user
+    if (account){
+        const token = account.token
+        if (token) {
+            config.headers!.Authorization = `Bearer ${token}`
+        }
+    }
+    return config
+})
+
 axios.interceptors.response.use(async response => {
     await sleep()
     const pagination = response.headers['pagination']
-    if (pagination){
+    if (pagination) {
         response.data = new PaginatedResponse(response.data, JSON.parse(pagination))
         return response
     }
@@ -72,8 +84,14 @@ const Basket = {
     removeItem: (id: number, qty = 1) => requests.delete(`basket?productId=${id}&quantity=${qty}`)
 }
 
+const Account = {
+    signin: (values: any) => requests.post("account/signin", values),
+    signup: (values: any) => requests.post("account/signup", values),
+    current: () => requests.get("account/current/user")
+}
+
 const agent = {
-    Catalog, TestErrors, Basket
+    Account, Basket, Catalog, TestErrors
 }
 
 export default agent

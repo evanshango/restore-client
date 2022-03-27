@@ -15,6 +15,7 @@ import {
 import {Link, NavLink} from "react-router-dom";
 import {ShoppingCart} from "@mui/icons-material";
 import {useAppSelector} from "../store/configureStore";
+import SignedInMenu from "./SignedInMenu";
 
 interface Props {
     darkMode: boolean
@@ -45,7 +46,8 @@ const navStyles = {
 const Header = ({darkMode, handleThemeChange}: Props) => {
     const matches = useMediaQuery("(min-width:720px)");
     const {basket} = useAppSelector(state => state.basket)
-    const itemsCount = basket!.items.length
+    const {user} = useAppSelector(state => state.account)
+    const itemsCount = basket && basket.items.length
     return (
         <AppBar position='fixed'>
             <Container>
@@ -66,17 +68,21 @@ const Header = ({darkMode, handleThemeChange}: Props) => {
                     </List>
                     <Box display={'flex'} alignItems={'center'}>
                         <IconButton size={'large'} sx={{color: 'inherit'}} component={Link} to={'/basket'}>
-                            <Badge badgeContent={itemsCount > 0 ? itemsCount : '0'} color={'secondary'}>
+                            <Badge badgeContent={itemsCount && itemsCount > 0 ? itemsCount : '0'} color={'secondary'}>
                                 <ShoppingCart/>
                             </Badge>
                         </IconButton>
-                        <List sx={{display: 'flex'}}>
-                            {rightLinks.map(({title, path}) => (
-                                <ListItem component={NavLink} to={path} key={path} sx={navStyles}>
-                                    {title.toUpperCase()}
-                                </ListItem>
-                            ))}
-                        </List>
+                        {user ? (
+                            <SignedInMenu/>
+                        ) : (
+                            <List sx={{display: 'flex'}}>
+                                {rightLinks.map(({title, path}) => (
+                                    <ListItem component={NavLink} to={path} key={path} sx={navStyles}>
+                                        {title.toUpperCase()}
+                                    </ListItem>
+                                ))}
+                            </List>
+                        )}
                     </Box>
                 </Toolbar>
             </Container>

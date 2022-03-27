@@ -109,8 +109,8 @@ const BasketPage = () => {
                 <Grid item xs={0} md={6}/>
                 <Grid item xs={12} md={6}>
                     <BasketSummary/>
-                    <Button component={Link} to={'/checkout'} variant={'outlined'} color={'success'} fullWidth
-                            size={'large'} sx={{marginTop: 3}}>
+                    <Button component={Link} to={'/checkout'} variant={'contained'} color={'primary'} fullWidth
+                            size={'large'} sx={{marginTop: 0}}>
                         Go to Checkout ({basket && basket.items.length} items)
                     </Button>
                 </Grid>

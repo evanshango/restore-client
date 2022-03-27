@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from "./Header";
 import {Container, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
@@ -12,29 +12,31 @@ import 'react-toastify/dist/ReactToastify.css'
 import ServerError from "../errors/ServerError";
 import NotFound from "../errors/NotFound";
 import BasketPage from "../../features/basket/BasketPage";
-import {useStoreContext} from "../context/StoreContext";
-import {getCookie} from "../util/util";
-import agent from "../api/agent";
 import Loader from "./Loader";
 import CheckoutPage from "../../features/checkout/CheckoutPage";
 import {useAppDispatch} from "../store/configureStore";
-import {setBasket} from "../../features/basket/basketSlice";
+import {fetchBasketAsync} from "../../features/basket/basketSlice";
+import Signin from "../../features/account/Signin";
+import Signup from "../../features/account/Signup";
+import {fetchUser} from "../../features/account/accountSlice";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
     const dispatch = useAppDispatch()
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const buyerId = getCookie("buyerId")
-        if (buyerId) {
-            agent.Basket.get()
-                .then(basket => dispatch(setBasket(basket)))
-                .catch(error => console.log(error))
-                .finally(() => setLoading(false))
-        } else {
-            setLoading(false)
+    const initApp = useCallback(async () => {
+        try {
+            await dispatch(fetchUser())
+            await dispatch(fetchBasketAsync())
+        } catch (e) {
+            console.log(e)
         }
     }, [dispatch])
+
+    useEffect(() => {
+        initApp().then(() => setLoading(false))
+    }, [initApp])
 
     const [darkMode, setDarkMode] = useState(false)
     const paletteType = darkMode ? 'dark' : 'light'
@@ -65,7 +67,9 @@ function App() {
                     <Route path={'/contact'} element={<ContactPage/>}/>
                     <Route path={'/server-error'} element={<ServerError/>}/>
                     <Route path={'/basket'} element={<BasketPage/>}/>
-                    <Route path={'/checkout'} element={<CheckoutPage/>}/>
+                    <Route path={'/checkout'} element={<PrivateRoute Component={CheckoutPage}/>}/>
+                    <Route path={'/login'} element={<Signin/>}/>
+                    <Route path={'/register'} element={<Signup/>}/>
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             </Container>
