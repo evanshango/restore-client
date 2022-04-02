@@ -6,3 +6,7 @@ export const getCookie = (key: string) => {
 export const currencyFormat = (amount: number) => {
     return `$${(amount/100).toFixed(2)}`
 }
+
+export const dateFormatter = (date: string) => {
+    return new Date(date).toDateString()
+}

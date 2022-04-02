@@ -4,9 +4,15 @@ import {currencyFormat} from "../../app/util/util";
 import {useAppSelector} from "../../app/store/configureStore";
 import {IBasketItem} from "../../app/models/basket";
 
-const BasketSummary = () => {
+interface IProps {
+    subtotal?: any
+}
+
+const BasketSummary = ({subtotal}: IProps) => {
     const {basket} = useAppSelector(state => state.basket)
-    const subtotal = basket && basket!.items.reduce((s: number, i: IBasketItem) => s + (i.quantity * i.price), 0)
+    if (!subtotal) {
+        subtotal = basket && basket!.items.reduce((s: number, i: IBasketItem) => s + (i.quantity * i.price), 0)
+    }
     const deliveryFee = subtotal && subtotal! > 10000 ? 0 : 500;
     return (
         <>

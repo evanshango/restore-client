@@ -20,6 +20,7 @@ import Signin from "../../features/account/Signin";
 import Signup from "../../features/account/Signup";
 import {fetchUser} from "../../features/account/accountSlice";
 import PrivateRoute from "./PrivateRoute";
+import OrdersPage from "../../features/orders/OrdersPage";
 
 function App() {
     const dispatch = useAppDispatch()
@@ -68,6 +69,7 @@ function App() {
                     <Route path={'/server-error'} element={<ServerError/>}/>
                     <Route path={'/basket'} element={<BasketPage/>}/>
                     <Route path={'/checkout'} element={<PrivateRoute Component={CheckoutPage}/>}/>
+                    <Route path={'/orders'} element={<PrivateRoute Component={OrdersPage}/>}/>
                     <Route path={'/login'} element={<Signin/>}/>
                     <Route path={'/register'} element={<Signup/>}/>
                     <Route path={'*'} element={<NotFound/>}/>

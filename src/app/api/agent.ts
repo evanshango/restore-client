@@ -87,11 +87,18 @@ const Basket = {
 const Account = {
     signin: (values: any) => requests.post("account/signin", values),
     signup: (values: any) => requests.post("account/signup", values),
-    current: () => requests.get("account/current/user")
+    current: () => requests.get("account/current/user"),
+    getAddress: () => requests.get('account/current/address')
+}
+
+const Orders = {
+    list: () => requests.get('orders'),
+    getOrder: (id: number) => requests.get(`orders/${id}`),
+    create: (values: any) => requests.post('orders', values)
 }
 
 const agent = {
-    Account, Basket, Catalog, TestErrors
+    Account, Basket, Catalog, Orders, TestErrors
 }
 
 export default agent
