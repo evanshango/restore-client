@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Header from "./Header";
-import {Container, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
 import HomePage from "../../features/home/HomePage";
 import Catalog from "../../features/catalog/Catalog";
@@ -59,22 +59,20 @@ function App() {
             <ToastContainer theme={'colored'} position={'bottom-right'} hideProgressBar/>
             <CssBaseline/>
             <Header darkMode={darkMode} handleThemeChange={handleThemeChange}/>
-            <Container sx={{mt: 12}}>
-                <Routes>
-                    <Route path={'/'} element={<HomePage/>}/>
-                    <Route path={'/catalog'} element={<Catalog/>}/>
-                    <Route path={'/catalog/:id'} element={<ProductDetail/>}/>
-                    <Route path={'/about'} element={<AboutPage/>}/>
-                    <Route path={'/contact'} element={<ContactPage/>}/>
-                    <Route path={'/server-error'} element={<ServerError/>}/>
-                    <Route path={'/basket'} element={<BasketPage/>}/>
-                    <Route path={'/checkout'} element={<PrivateRoute Component={CheckoutWrapper}/>}/>
-                    <Route path={'/orders'} element={<PrivateRoute Component={OrdersPage}/>}/>
-                    <Route path={'/login'} element={<Signin/>}/>
-                    <Route path={'/register'} element={<Signup/>}/>
-                    <Route path={'*'} element={<NotFound/>}/>
-                </Routes>
-            </Container>
+            <Routes>
+                <Route path={'/'} element={<HomePage/>}/>
+                <Route path={'/catalog'} element={<Catalog/>}/>
+                <Route path={'/catalog/:id'} element={<ProductDetail/>}/>
+                <Route path={'/about'} element={<AboutPage/>}/>
+                <Route path={'/contact'} element={<ContactPage/>}/>
+                <Route path={'/server-error'} element={<ServerError/>}/>
+                <Route path={'/basket'} element={<BasketPage/>}/>
+                <Route path={'/checkout'} element={<PrivateRoute Component={CheckoutWrapper}/>}/>
+                <Route path={'/orders'} element={<PrivateRoute Component={OrdersPage}/>}/>
+                <Route path={'/login'} element={<Signin/>}/>
+                <Route path={'/register'} element={<Signup/>}/>
+                <Route path={'*'} element={<NotFound/>}/>
+            </Routes>
         </ThemeProvider>
     );
 }

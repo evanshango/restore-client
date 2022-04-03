@@ -33,7 +33,9 @@ const BasketSummary = ({subtotal}: IProps) => {
                         </TableRow>
                         <TableRow>
                             <TableCell>
-                                <span style={{fontStyle: 'italic'}}>*Orders over $100 qualify for free delivery</span>
+                                <span style={{fontStyle: 'italic', fontWeight: 'bold'}}>
+                                    *Orders over $100 qualify for free delivery
+                                </span>
                             </TableCell>
                         </TableRow>
                     </TableBody>

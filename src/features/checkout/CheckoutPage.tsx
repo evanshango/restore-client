@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import {Box, Button, Paper, Step, StepLabel, Stepper, Typography} from "@mui/material";
+import {Box, Button, Container, Paper, Step, StepLabel, Stepper, Typography} from "@mui/material";
 import AddressForm from "./AddressForm";
 import Review from "./Review";
 import PaymentForm from "./PaymentForm";
@@ -125,7 +125,7 @@ const CheckoutPage = () => {
     }
 
     return (
-        <>
+        <Container sx={{mt: 12}}>
             <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                 <Typography sx={{p: 1, display: 'flex', alignItems: 'center'}} gutterBottom variant={'h5'}>
                     Checkout
@@ -176,7 +176,7 @@ const CheckoutPage = () => {
                     </>
                 </Paper>
             </FormProvider>
-        </>
+        </Container>
     );
 };
 

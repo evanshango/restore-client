@@ -1,6 +1,6 @@
 import React from 'react';
 import {IOrder} from "../../app/models/order";
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Box, Button, Container, Grid, Typography} from "@mui/material";
 import BasketTable from "../basket/BasketTable";
 import {IBasketItem} from "../../app/models/basket";
 import BasketSummary from "../basket/BasketSummary";
@@ -21,10 +21,10 @@ const OrderDetails = ({order, setSelectedOrder}: IProps) => {
     }
 
     return (
-        <>
+        <Container sx={{mt: 12}}>
             <Box display={'flex'} justifyContent={'space-between'}>
                 <Typography sx={{p: 2, display: 'flex', alignItems: 'center'}} gutterBottom variant={'h6'}>
-                    Order #{order.id}<small style={{color: 'green'}}> - {order.orderStatus.toUpperCase()}</small>
+                    Order #{order.id} - {order.orderStatus.toUpperCase()}
                 </Typography>
                 <Button variant={'contained'} sx={{m: 2}} size={'medium'} onClick={handleBackClick}>
                     Back To Orders
@@ -37,7 +37,7 @@ const OrderDetails = ({order, setSelectedOrder}: IProps) => {
                     <BasketSummary subtotal={subtotal}/>
                 </Grid>
             </Grid>
-        </>
+        </Container>
     );
 };
 

@@ -17,17 +17,17 @@ const Signin = () => {
     })
 
     const submitForm = async (data: FieldValues) => {
-        try{
+        try {
             await dispatch(signinUser(data))
             navigate(location.state.from.pathname || '/catalog')
-        } catch (e){
+        } catch (e) {
             console.log('An error occurred while Logging in.')
         }
     }
 
     return (
         <Container component={Paper} maxWidth="sm"
-                   sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', p: 4}}>
+                   sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', p: 4, mt: 12}}>
             <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}><LockOutlined/></Avatar>
             <Typography component="h1" variant="h5">Login</Typography>
             <Box component="form" onSubmit={handleSubmit(submitForm)} noValidate sx={{mt: 1}}>

@@ -5,7 +5,7 @@ import {Link, useLocation} from "react-router-dom";
 const ServerError = () => {
     const {state}: any = useLocation()
     return (
-        <Container component={Paper} sx={{padding: '1rem'}}>
+        <Container component={Paper} sx={{padding: '1rem', mt: 12}}>
             {state && state.detail !== '' ? (
                 <>
                     <Typography variant={'h4'} color={'error'} gutterBottom>{state.title}</Typography>

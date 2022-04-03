@@ -8,9 +8,7 @@ const AddressForm = () => {
     const {control, formState} = useFormContext()
     return (
         <>
-            <Typography variant="h6" gutterBottom>
-                Shipping Address
-            </Typography>
+            <Typography variant="h6" gutterBottom sx={{mb: 3}}>Shipping Address</Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <AppTestInput label={'Full Name'} name={'fullName'} control={control}/>
@@ -34,10 +32,9 @@ const AddressForm = () => {
                     <AppTestInput label={'Country'} name={'country'} control={control}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <AppCheckbox
-                        disabled={!formState.isDirty}
-                        label={'Save this as the default Address'}
-                        name={'saveAddress'} control={control}/>
+                    <AppCheckbox disabled={!formState.isDirty} label={'Save this as the default Address'}
+                                 name={'saveAddress'} control={control}
+                    />
                 </Grid>
             </Grid>
         </>

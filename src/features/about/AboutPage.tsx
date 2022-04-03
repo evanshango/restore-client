@@ -23,7 +23,7 @@ const AboutPage = () => {
     }
 
     return (
-        <Container>
+        <Container sx={{mt: 12}}>
             <Typography gutterBottom variant='h5'>Errors For Testing Purposes</Typography>
             <ButtonGroup fullWidth orientation={`${matches ? `horizontal` : `vertical`}`}>
                 <Button variant={'contained'}

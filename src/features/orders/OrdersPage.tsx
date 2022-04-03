@@ -1,5 +1,6 @@
 import {
     Button,
+    Container,
     Paper,
     Table,
     TableBody,
@@ -41,13 +42,13 @@ const OrdersPage = () => {
 
     return (
         orders && (
-            <>
+            <Container sx={{mt: 12}}>
                 <Typography variant={'h6'} gutterBottom>Your Orders - ({orders.length}) Items</Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Order Number</TableCell>
+                                <TableCell align='center'>Order Number</TableCell>
                                 <TableCell align="right">Total</TableCell>
                                 <TableCell align="center">Order Date</TableCell>
                                 <TableCell align="center">Order Status</TableCell>
@@ -57,7 +58,7 @@ const OrdersPage = () => {
                         <TableBody>
                             {orders.map((order) => (
                                 <TableRow key={order.id} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                    <TableCell component="th" scope="row">{order.id}</TableCell>
+                                    <TableCell component="th" scope="row" align='center'>{order.id}</TableCell>
                                     <TableCell align="right">{currencyFormat(order.total)}</TableCell>
                                     <TableCell align="center">{dateFormatter(order.orderDate)}</TableCell>
                                     <TableCell align="center" sx={{
@@ -78,7 +79,7 @@ const OrdersPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </>
+            </Container>
         )
     );
 };

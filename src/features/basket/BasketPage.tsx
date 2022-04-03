@@ -27,7 +27,7 @@ const BasketPage = () => {
     )
 
     return (
-        <>
+        <Container sx={{mt: 12}}>
             <Typography variant={'h6'} gutterBottom>Your Basket - ({basket.items.length}) Items</Typography>
             <BasketTable items={basket.items}/>
             <Grid container sx={{margin: '1rem 0'}}>
@@ -40,7 +40,7 @@ const BasketPage = () => {
                     </Button>
                 </Grid>
             </Grid>
-        </>
+        </Container>
     );
 };
 
