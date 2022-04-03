@@ -29,7 +29,7 @@ const ProductDetail = () => {
     const {status: productStatus} = useAppSelector(state => state.catalog)
 
     const [quantity, setQuantity] = useState(0)
-    const item = basket && product && basket!.items.find(i => i.productId === product!.id)
+    const item = product && basket?.items.find(i => i.productId === product!.id)
 
     const handleInputChange = (event: any) => {
         if (event.target.value >= 0) {
@@ -103,15 +103,15 @@ const ProductDetail = () => {
                     <Grid item xs={12} md={6}>
                         <LoadingButton sx={{height: '55px'}} color={'primary'} size={'large'} variant={'contained'}
                                        fullWidth loading={status.includes('pending')} onClick={handleUpdateCart}
-                                       disabled={item && item.quantity === quantity || !item && quantity === 0}>
+                                       disabled={item?.quantity === quantity || quantity === 0}>
                             {item ? 'Update Quantity' : 'Add to Cart'}
                         </LoadingButton>
                     </Grid>
-                    {basket && basket.items.length > 0 && (
+                    {basket && basket?.items.length > 0 && (
                         <Grid item xs={12} sx={{marginTop: 3}}>
                             <Button component={Link} to={'/checkout'} variant={'outlined'} color={'success'} fullWidth
                                     size={'large'}>
-                                Go to Checkout ({basket && basket.items.length} items)
+                                Go to Checkout ({basket?.items.length} items)
                             </Button>
                         </Grid>
                     )}

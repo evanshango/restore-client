@@ -11,7 +11,7 @@ interface IProps {
 const BasketSummary = ({subtotal}: IProps) => {
     const {basket} = useAppSelector(state => state.basket)
     if (!subtotal) {
-        subtotal = basket && basket!.items.reduce((s: number, i: IBasketItem) => s + (i.quantity * i.price), 0)
+        subtotal = basket?.items.reduce((s: number, i: IBasketItem) => s + (i.quantity * i.price), 0) ?? 0
     }
     const deliveryFee = subtotal && subtotal! > 10000 ? 0 : 500;
     return (

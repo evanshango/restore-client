@@ -23,10 +23,10 @@ const OrderDetails = ({order, setSelectedOrder}: IProps) => {
     return (
         <>
             <Box display={'flex'} justifyContent={'space-between'}>
-                <Typography sx={{p: 2, display: 'flex', alignItems: 'center'}} gutterBottom variant={'h5'}>
-                    Order #{order.id} - {order.orderStatus.toUpperCase()}
+                <Typography sx={{p: 2, display: 'flex', alignItems: 'center'}} gutterBottom variant={'h6'}>
+                    Order #{order.id}<small style={{color: 'green'}}> - {order.orderStatus.toUpperCase()}</small>
                 </Typography>
-                <Button variant={'outlined'} sx={{m: 2}} size={'medium'} onClick={handleBackClick}>
+                <Button variant={'contained'} sx={{m: 2}} size={'medium'} onClick={handleBackClick}>
                     Back To Orders
                 </Button>
             </Box>

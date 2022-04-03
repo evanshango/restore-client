@@ -24,7 +24,7 @@ const OrdersPage = () => {
     const [selectedOrderNo, setSelectedOrderNo] = useState(0)
 
     useEffect(() => {
-        setSelectedOrderNo(state.orderId)
+        setSelectedOrderNo(state?.orderId)
         agent.Orders.list().then(res => setOrders(res))
             .catch(error => console.log(error))
             .finally(() => setLoading(false))
@@ -60,8 +60,12 @@ const OrdersPage = () => {
                                     <TableCell component="th" scope="row">{order.id}</TableCell>
                                     <TableCell align="right">{currencyFormat(order.total)}</TableCell>
                                     <TableCell align="center">{dateFormatter(order.orderDate)}</TableCell>
-                                    <TableCell align="center" sx={{fontSize: '.8rem'}}>
-                                        {order.orderStatus.toUpperCase()}
+                                    <TableCell align="center" sx={{
+                                        fontSize: '.8rem', color: order.orderStatus.includes('Received')
+                                            ? 'green' : (order.orderStatus.includes('Pending') ? 'blue' : 'red'),
+                                        fontWeight: 'bold'
+                                    }}>
+                                        {order.orderStatus}
                                     </TableCell>
                                     <TableCell align="center">
                                         <Button variant={'outlined'} sx={{fontSize: '.7rem'}} onClick={() =>
