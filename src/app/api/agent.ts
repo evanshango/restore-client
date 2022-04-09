@@ -47,6 +47,9 @@ axios.interceptors.response.use(async response => {
         case 401:
             toast.warn(data.title)
             break
+        case 403:
+            toast.error("You are not authorized to perform this action")
+            break
         case 500:
             history.push('/server-error', data)
             break
@@ -61,6 +64,26 @@ const requests = {
     post: (url: string, body: Object) => axios.post(url, body).then(responseBody),
     put: (url: string, body: Object) => axios.put(url, body).then(responseBody),
     delete: (url: string) => axios.delete(url).then(responseBody),
+    createProduct: (url: string, data: FormData) => axios.post(url, data, {
+        headers: {'Content-type': 'multipart/form-data'}
+    }).then(responseBody),
+    updateProduct: (url: string, data: FormData) => axios.put(url, data, {
+        headers: {'Content-type': 'multipart/form-data'}
+    }).then(responseBody)
+}
+
+const createFormData = (item: any) => {
+    let formData = new FormData()
+    for (const key in item){
+        formData.append(key, item[key])
+    }
+    return formData
+}
+
+const Admin = {
+    createProduct: (product: any) => requests.createProduct('products', createFormData(product)),
+    updateProduct: (product: any) => requests.updateProduct('products', createFormData(product)),
+    deleteProduct: (id: number) => requests.delete(`products/${id}`)
 }
 
 const Catalog = {
@@ -101,7 +124,7 @@ const Payments = {
 }
 
 const agent = {
-    Account, Basket, Catalog, Orders, Payments, TestErrors
+    Account, Admin, Basket, Catalog, Orders, Payments, TestErrors
 }
 
 export default agent

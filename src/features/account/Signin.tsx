@@ -17,9 +17,10 @@ const Signin = () => {
     })
 
     const submitForm = async (data: FieldValues) => {
+        const path = location.state ? location.state.from.pathname : '/catalog'
         try {
             await dispatch(signinUser(data))
-            navigate(location.state.from.pathname || '/catalog')
+            navigate(path)
         } catch (e) {
             console.log('An error occurred while Logging in.')
         }

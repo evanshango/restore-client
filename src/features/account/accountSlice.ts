@@ -6,6 +6,8 @@ import {history} from "../../index";
 import {toast} from "react-toastify";
 import {setBasket} from "../basket/basketSlice";
 
+const KEY = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+
 interface IAccountState {
     user: IUser | null
 }
@@ -57,7 +59,9 @@ export const accountSlice = createSlice({
     name: 'account', initialState,
     reducers: {
         setUser: (state: Draft<any>, action: PayloadAction<any>) => {
-            state.user = action.payload
+            let claims = JSON.parse(atob(action.payload.token.split('.')[1]))
+            let roles = claims[KEY]
+            state.user = {...action.payload, roles: typeof (roles) === "string" ? [roles] : roles}
         },
         signout: (state: Draft<any>) => {
             state.user = null
@@ -73,7 +77,9 @@ export const accountSlice = createSlice({
             history.push('/')
         })
         builder.addMatcher(isAnyOf(signinUser.fulfilled, fetchUser.fulfilled), ((state: Draft<any>, action) => {
-            state.user = action.payload
+            let claims = JSON.parse(atob(action.payload.token.split('.')[1]))
+            let roles = claims[KEY]
+            state.user = {...action.payload, roles: typeof (roles) === "string" ? [roles] : roles}
         }))
         builder.addMatcher(isAnyOf(signinUser.rejected), (state: Draft<any>, action: any) => {
             state.user = null

@@ -21,6 +21,7 @@ import {fetchUser} from "../../features/account/accountSlice";
 import PrivateRoute from "./PrivateRoute";
 import OrdersPage from "../../features/orders/OrdersPage";
 import CheckoutWrapper from "../../features/checkout/CheckoutWrapper";
+import Inventory from "../../features/admin/Inventory";
 
 function App() {
     const dispatch = useAppDispatch()
@@ -38,6 +39,7 @@ function App() {
     useEffect(() => {
         initApp().then(() => setLoading(false))
     }, [initApp])
+
 
     const [darkMode, setDarkMode] = useState(false)
     const paletteType = darkMode ? 'dark' : 'light'
@@ -69,6 +71,7 @@ function App() {
                 <Route path={'/basket'} element={<BasketPage/>}/>
                 <Route path={'/checkout'} element={<PrivateRoute Component={CheckoutWrapper}/>}/>
                 <Route path={'/orders'} element={<PrivateRoute Component={OrdersPage}/>}/>
+                <Route path={'/inventory'} element={<PrivateRoute Component={Inventory}/>}/>
                 <Route path={'/login'} element={<Signin/>}/>
                 <Route path={'/register'} element={<Signup/>}/>
                 <Route path={'*'} element={<NotFound/>}/>

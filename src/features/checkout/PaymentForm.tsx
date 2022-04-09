@@ -1,7 +1,7 @@
 import {Grid, TextField, Typography} from '@mui/material';
 import React from 'react';
 import {useFormContext} from "react-hook-form";
-import AppTestInput from "../../app/components/AppTestInput";
+import AppTextInput from "../../app/components/AppTextInput";
 import {CardCvcElement, CardExpiryElement, CardNumberElement} from "@stripe/react-stripe-js";
 import {StripeInput} from "./StripeInput";
 import {StripeElementType} from "@stripe/stripe-js";
@@ -21,7 +21,7 @@ const PaymentForm = ({cardState, onCardInputChange}: IProps) => {
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
-                    <AppTestInput label={'Name on Card'} name={'nameOnCard'} control={control}/>
+                    <AppTextInput label={'Name on Card'} name={'nameOnCard'} control={control}/>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <TextField id="cardNumber" label="Card number" fullWidth autoComplete="cc-number"

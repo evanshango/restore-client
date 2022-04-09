@@ -1,7 +1,7 @@
 import {Grid, Typography} from '@mui/material';
 import React from 'react';
 import {useFormContext} from "react-hook-form";
-import AppTestInput from "../../app/components/AppTestInput";
+import AppTextInput from "../../app/components/AppTextInput";
 import AppCheckbox from "../../app/components/AppCheckbox";
 
 const AddressForm = () => {
@@ -11,25 +11,25 @@ const AddressForm = () => {
             <Typography variant="h6" gutterBottom sx={{mb: 3}}>Shipping Address</Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <AppTestInput label={'Full Name'} name={'fullName'} control={control}/>
+                    <AppTextInput label={'Full Name'} name={'fullName'} control={control}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <AppTestInput label={'Address Line 1'} name={'address1'} control={control}/>
+                    <AppTextInput label={'Address Line 1'} name={'address1'} control={control}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <AppTestInput label={'Address Line 2'} name={'address2'} control={control}/>
+                    <AppTextInput label={'Address Line 2'} name={'address2'} control={control}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <AppTestInput label={'City'} name={'city'} control={control}/>
+                    <AppTextInput label={'City'} name={'city'} control={control}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <AppTestInput label={'State / Province / Region'} name={'state'} control={control}/>
+                    <AppTextInput label={'State / Province / Region'} name={'state'} control={control}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <AppTestInput label={'Zip / Postal code'} name={'zipCode'} control={control}/>
+                    <AppTextInput label={'Zip / Postal code'} name={'zipCode'} control={control}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <AppTestInput label={'Country'} name={'country'} control={control}/>
+                    <AppTextInput label={'Country'} name={'country'} control={control}/>
                 </Grid>
                 <Grid item xs={12}>
                     <AppCheckbox disabled={!formState.isDirty} label={'Save this as the default Address'}
